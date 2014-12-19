@@ -13,6 +13,19 @@ namespace SimpleLibraryDemo
         {
             Console.WriteLine("Simple Library Demonstration Application");
             Console.WriteLine("Please enter a string:");
+
+            string input = Console.ReadLine();
+
+            try
+            {
+                StringUtilities stringUtils = new StringUtilities();
+                Console.WriteLine(stringUtils.GetDuplicates(input));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
         }
     }
 }
