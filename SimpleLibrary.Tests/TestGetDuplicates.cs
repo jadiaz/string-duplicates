@@ -59,5 +59,21 @@ namespace SimpleLibrary.Tests
                 throw;
             }
         }
+
+        [TestMethod]
+        public void Test_GetDuplicates_Returns_Only_Distinct_Characters()
+        {
+            string input = "aaa11122233334455666";
+
+            try
+            {
+                Assert.AreEqual("a123456", _stringUtils.GetDuplicates(input));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
     }
 }

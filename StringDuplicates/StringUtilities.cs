@@ -13,16 +13,25 @@ namespace SimpleLibrary
             if (String.IsNullOrEmpty(s)) throw new ArgumentNullException("s");
 
             List<char> processed = new List<char>();
-            StringBuilder dups = new StringBuilder();
+            List<char> dups = new List<char>();
+            StringBuilder sb = new StringBuilder();
 
             foreach (var chr in s.ToCharArray())
             {
                 if (processed.Contains(chr))
-                    dups.Append(chr.ToString());
-
-                processed.Add(chr);
+                {
+                    if (!dups.Contains(chr))
+                    {
+                        dups.Add(chr);
+                        sb.Append(chr);
+                    }
+                }
+                else
+                {
+                    processed.Add(chr);
+                }
             }
-            return dups.ToString();
+            return sb.ToString();
         }
     }
 }
