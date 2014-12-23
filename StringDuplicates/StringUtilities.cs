@@ -13,33 +13,23 @@ namespace SimpleLibrary
         {
             if (String.IsNullOrEmpty(s)) throw new ArgumentNullException("s");
 
-            List<char> dups = new List<char>();
+            Dictionary<char, int> processed = new Dictionary<char, int>();
             StringBuilder sb = new StringBuilder();
 
-            char[] arr1 = s.ToCharArray();
-            char[] arr2 = s.ToCharArray();
+            char[] arr = s.ToCharArray();
 
-            for (int i = 0; i < 20; i++)
+            foreach (char c in arr)
             {
+                if (processed.ContainsKey(c))
+                    processed[c] = processed[c] + 1;
+                else
+                    processed.Add(c, 1);
+            }
 
-                Stopwatch sw = Stopwatch.StartNew();
-                for (int c2 = 0; c2 < arr2.Length; c2++)
-                {
-                    if (!dups.Contains(arr2[c2]))
-                    {
-                        for (int c1 = 0; c1 < arr1.Length; c1++)
-                        {
-                            if (arr2[c2] == arr1[c1])
-                            {
-                                dups.Add(arr2[c2]);
-                                sb.Append(arr2[c2]);
-                                break;
-                            }
-                        }
-                    }
-                }
-                sw.Stop();
-                Debug.WriteLine("elapsed time {0}ms", sw.Elapsed);
+            foreach (var character in processed)
+            {
+                if (character.Value > 1)
+                    sb.Append(character.Key);
             }
             return sb.ToString();
         }
