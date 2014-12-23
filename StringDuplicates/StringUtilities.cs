@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,20 +17,26 @@ namespace SimpleLibrary
             List<char> dups = new List<char>();
             StringBuilder sb = new StringBuilder();
 
-            foreach (var chr in s.ToCharArray())
+            for (int i = 0; i < 20; i++)
             {
-                if (processed.Contains(chr))
+                Stopwatch sw = Stopwatch.StartNew();
+                foreach (var chr in s.ToCharArray())
                 {
-                    if (!dups.Contains(chr))
+                    if (processed.Contains(chr))
                     {
-                        dups.Add(chr);
-                        sb.Append(chr);
+                        if (!dups.Contains(chr))
+                        {
+                            dups.Add(chr);
+                            sb.Append(chr);
+                        }
+                    }
+                    else
+                    {
+                        processed.Add(chr);
                     }
                 }
-                else
-                {
-                    processed.Add(chr);
-                }
+                sw.Stop();
+                Debug.WriteLine("elapsed time {0}", sw.Elapsed);
             }
             return sb.ToString();
         }
