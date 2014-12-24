@@ -21,16 +21,19 @@ namespace SimpleLibrary
             foreach (char c in arr)
             {
                 if (processed.ContainsKey(c))
+                {
                     processed[c] = processed[c] + 1;
+                    if (processed[c] == 2)
+                    {
+                        sb.Append(c);
+                    }
+                }
                 else
+                {
                     processed.Add(c, 1);
+                }
             }
 
-            foreach (var character in processed)
-            {
-                if (character.Value > 1)
-                    sb.Append(character.Key);
-            }
             return sb.ToString();
         }
     }
